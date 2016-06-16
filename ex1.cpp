@@ -1,3 +1,10 @@
+/*
+Owner: Ngo Duc Dung
+Added: 16/06/2016
+Last update: 16/06/2016
+*/
+
+
 #include <iostream>
 using namespace std;
 
@@ -7,9 +14,9 @@ int fibo(int n);
 
 int main()
 {
-	int n;
-	int x;
-	int sum;
+	int n;			//input number
+	int x;			//fibonanci number
+	int sum;		//sum of sequence of Fibonanci
 	
 	cout << "Please enter a random number: ";
 	cin >> n;
@@ -28,6 +35,11 @@ int main()
    
 	return 0;
 }
+
+/*
+Function: calculate fibonanci number
+n: number is used to caculate fibonanci number
+*/
 
 int fibo(int n){
 	if(n == 1 || n == 2){

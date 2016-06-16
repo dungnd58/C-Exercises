@@ -1,4 +1,12 @@
+/*
+Owner: Ngo Duc Dung
+Added: 16/06/2016
+Last update: 16/06/2016
+*/
+
+
 #include <iostream>
+#include <cstdlib>
 
 using namespace std;
 
@@ -12,33 +20,95 @@ struct Intership
 	int word_mark;
 	int jira_mark;
 	int sum;
-	char rank[20];
+	string rank;
 };
 typedef struct Intership Intership;
 
-void inputInfo(Intership* student, int num);
-void printOutput(Intership* students, int num);
+void inputAllIntership(Intership* students, int num);
+void printMainInfo(Intership* students, int num);
+void printAll(Intership* students, int num);
 void sumScore(Intership* student, int num);
 void rateRank(Intership* students, int num);
 
 int main()
 {
-	int num = 0;
-	cout <<" Please enter number of students: ";
-	cin >> num;
+	int num = 0;					//number of intership
+	Intership students[num];		//array of interships
 	
-	Intership students[num];
+	int choice;
+	bool maintain = true;
 	
-	inputInfo(students,num);
+	while(maintain){
+		cout <<"----------------------------------------------" << endl;
+		cout <<"1. Enter all student and their marks " << endl;
+		cout <<"2. Process the data. " << endl;
+		cout <<"3. List all students. " << endl;
+		cout <<"4. Exit.  " << endl;
+		cout <<"Enter your choice: ";
+		cin >> choice;
+		cout << endl;
+		
+
+		// Start to execute user choice
+		switch(choice){
+			case 1:
+			{
+				cout <<" Please enter number of students: ";
+				cin >> num;
+				
+				inputAllIntership(students,num);
+				
+				printMainInfo(students,num);
+				
+				sumScore(students,num);
+			
+				rateRank(students,num);
+				
+				break;
+			}
+			case 2:
+			{
+				if(num > 0){
+					sumScore(students,num);
+			
+					rateRank(students,num);
+				
+					printAll(students,num);
+					
+					cout <<"Done";
+				} else {
+					cout <<"Empty list of students"<<endl;
+				}
+				break;
+			}
+			case 3:
+			{
+				if(num > 0){	
+					printAll(students,num);
+				} else {
+					cout <<"Empty list of students"<<endl;
+				}
+				break;
+			}
+			case 4:
+			{
+				maintain = false;
+				break;
+			}
+			default:
+			{
+				cout << "No choice. Please choice again." <<endl;
+			}
+		} //End execute choice
+	}
 	
-	sumScore(students, num);
-	
-	rateRank(students, num);
-	
-	printOutput(students,num);
+	return 0;
 }
 
-void inputInfo(Intership* students, int num){
+/*
+Function: input all intership information
+*/
+void inputAllIntership(Intership* students, int num){
 	int i = 0;
 	while(i < num){
 		cout << "Student ID: " << i + 1 << endl;
@@ -62,11 +132,38 @@ void inputInfo(Intership* students, int num){
 	}
 }
 
-void printOutput(Intership* students, int num){
+/*
+Function: print intership information, except marks and rank
+*/
+void printMainInfo(Intership* students, int num){
 	cout <<" List of intership: " << endl;
-	cout <<"STT:" << "    ";
-	cout <<"Name:" << "    ";
-	cout <<"Birthday:" << "    ";
+	cout <<"STT" << "    ";
+	cout <<"Name" << "    ";
+	cout <<"Birthday" << "    ";
+	cout << endl;
+	
+	int j=0;
+	while(j < num){
+		cout << j + 1 << "    ";
+		
+		cout << students[j].name << "    ";
+		
+		cout << students[j].birthday << "    ";
+		
+		j++;
+	}
+}
+
+/*
+Function: print all intership information
+*/
+void printAll(Intership* students, int num){
+	cout <<" List of intership: " << endl;
+	cout <<"STT" << "    ";
+	cout <<"Name" << "    ";
+	cout <<"Birthday" << "    ";
+	cout <<"Sum" << "    ";
+	cout <<"Rank" << "    ";
 	cout << endl;
 	
 	int j=0;
@@ -76,32 +173,43 @@ void printOutput(Intership* students, int num){
 		cout << students[j].name << "    ";
 		
 		cout << students[j].birthday << "    ";	
+
+		cout << students[j].sum << "    ";	
+		
+		cout << students[j].rank << "    ";	
 		j++;
 	}
 }
 
+/*
+Function: caculate sum of marks
+*/
 void sumScore(Intership* students, int num){
 	int j=0;
 	while(j < num){
-		students[j].sum += students[j].win_mark; 
+		students[j].sum += students[j].win_mark;
 		students[j].sum += students[j].jira_mark;
 		students[j].sum += students[j].word_mark;
-		j--;	
+		j++;
 	}
 }
+
+/*
+Function: rate rank of intership based on sum of marks
+*/
 
 void rateRank(Intership* students, int num){
 	int j=0;
 	while(j < num){
 		if(students[j].sum >= 24){
 			students[j].rank = "Exelence";
-		} if(students[j].sum < 24 && students[j].sum >= 18){
+		} else if(students[j].sum < 24 && students[j].sum >= 18){
 			students[j].rank = "Good";
 		} else {
 			students[j].rank = "Average";
 		}
 		
-		j--;	
+		j++;	
 	}
 }
 
