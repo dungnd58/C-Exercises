@@ -16,10 +16,10 @@ struct Intership
 };
 typedef struct Intership Intership;
 
-int inputInfo(Intership* student, int num);
-int printOutput(Intership* students, int num);
-int sumScore(Intership* student, int num);
-int rateRank(Intership* students, int num);
+void inputInfo(Intership* student, int num);
+void printOutput(Intership* students, int num);
+void sumScore(Intership* student, int num);
+void rateRank(Intership* students, int num);
 
 int main()
 {
@@ -38,7 +38,7 @@ int main()
 	printOutput(students,num);
 }
 
-int inputInfo(Intership* students, int num){
+void inputInfo(Intership* students, int num){
 	int i = 0;
 	while(i < num){
 		cout << "Student ID: " << i + 1 << endl;
@@ -62,7 +62,7 @@ int inputInfo(Intership* students, int num){
 	}
 }
 
-int printOutput(Intership* students, int num){
+void printOutput(Intership* students, int num){
 	cout <<" List of intership: " << endl;
 	cout <<"STT:" << "    ";
 	cout <<"Name:" << "    ";
@@ -80,12 +80,12 @@ int printOutput(Intership* students, int num){
 	}
 }
 
-void sumScore(Intership* student, int num){
+void sumScore(Intership* students, int num){
 	int j=0;
 	while(j < num){
-		student[j].sum += students[j].win_mark; 
-		student[j].sum += students[j].jira_mark;
-		student[j].sum += students[j].word_mark;
+		students[j].sum += students[j].win_mark; 
+		students[j].sum += students[j].jira_mark;
+		students[j].sum += students[j].word_mark;
 		j--;	
 	}
 }
@@ -93,6 +93,13 @@ void sumScore(Intership* student, int num){
 void rateRank(Intership* students, int num){
 	int j=0;
 	while(j < num){
+		if(students[j].sum >= 24){
+			students[j].rank = "Exelence";
+		} if(students[j].sum < 24 && students[j].sum >= 18){
+			students[j].rank = "Good";
+		} else {
+			students[j].rank = "Average";
+		}
 		
 		j--;	
 	}
