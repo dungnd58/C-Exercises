@@ -33,12 +33,12 @@ void rateRank(Intership* students, int num);
 int main()
 {
 	int num = 0;					//number of intership
-	Intership students[num];		//array of interships
+	
+	Intership* students;
 	
 	int choice;
-	bool maintain = true;
 	
-	while(maintain){
+	while(choice != 4){
 		cout <<"----------------------------------------------" << endl;
 		cout <<"1. Enter all student and their marks " << endl;
 		cout <<"2. Process the data. " << endl;
@@ -56,48 +56,49 @@ int main()
 				cout <<" Please enter number of students: ";
 				cin >> num;
 				
+				students = new Intership[num];		//array of interships
+				
 				inputAllIntership(students,num);
 				
 				printMainInfo(students,num);
-				
-				sumScore(students,num);
-			
-				rateRank(students,num);
 				
 				break;
 			}
 			case 2:
 			{
-				if(num > 0){
-					sumScore(students,num);
-			
-					rateRank(students,num);
+				if(students){
+					if(num > 0){
+						sumScore(students,num);
 				
-					printAll(students,num);
+						rateRank(students,num);
 					
-					cout <<"Done";
-				} else {
-					cout <<"Empty list of students"<<endl;
+						printAll(students,num);
+						
+						cout <<"Done";
+					} else {
+						cout <<"Empty list of students"<<endl;
+					}
 				}
 				break;
 			}
 			case 3:
 			{
-				if(num > 0){	
-					printAll(students,num);
-				} else {
-					cout <<"Empty list of students"<<endl;
+				if(students){
+					if(num > 0){	
+						printAll(students,num);
+					} else {
+						cout <<"Empty list of students"<<endl;
+					}
 				}
 				break;
 			}
 			case 4:
 			{
-				maintain = false;
 				break;
 			}
 			default:
 			{
-				cout << "No choice. Please choice again." <<endl;
+				cout << "Invalid choice. Please choose again." <<endl;
 			}
 		} //End execute choice
 	}
@@ -128,6 +129,11 @@ void inputAllIntership(Intership* students, int num){
 		cout <<"Jira-mark: ";
 		cin >> students[i].jira_mark;
 		
+		students[i].sum = 0;
+		students[i].rank = "";
+		
+		cout << endl;
+		
 		i++;
 	}
 }
@@ -149,6 +155,8 @@ void printMainInfo(Intership* students, int num){
 		cout << students[j].name << "    ";
 		
 		cout << students[j].birthday << "    ";
+		
+		cout << endl;
 		
 		j++;
 	}
@@ -176,7 +184,10 @@ void printAll(Intership* students, int num){
 
 		cout << students[j].sum << "    ";	
 		
-		cout << students[j].rank << "    ";	
+		cout << students[j].rank << "    ";
+		
+		cout << endl;
+		
 		j++;
 	}
 }
