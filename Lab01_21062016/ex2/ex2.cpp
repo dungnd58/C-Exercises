@@ -1,19 +1,18 @@
 /*
 Owner: Ngo Duc Dung
 Added: 17/06/2016
-Last update: 17/06/2016
+Last update: 21/06/2016
 */
 
 
 #include <iostream>
-#include <fstream>
+
+#include "manage_file.h"
 
 using namespace std;
 
 // main() is where program execution begins.
 
-void writeToFile(double* nums);
-void readFromFile(double* nums);
 void printNums(double* nums);
 double sumNums(double* nums);
 
@@ -21,6 +20,8 @@ int main()
 {
 	double real_nums[10];		//array of real numbers
 	double sum;					//sum of square of each number
+	
+	FileManager file_mn;
 	
 	cout << "Enter 10 real numbers: " << endl;
 	
@@ -32,10 +33,10 @@ int main()
 		i++;
 	}
 	
-	writeToFile(real_nums);
+	file_mn.writeToFile(real_nums);
 	cout << "Writing completed." << endl << endl;
 	
-	readFromFile(real_nums);
+	file_mn.readFromFile(real_nums);
 	cout << "Reading completed." << endl << endl;
 	
 	cout << "Input: ";
@@ -55,44 +56,6 @@ void printNums(double* nums){
 		cout << nums[i] << " ";
 		i++;
 	}
-}
-
-/* Function: write 10 real numbers to input.txt */
-
-void writeToFile(double* nums){
-	fstream file;	//object used to manage files
-	
-	cout << "Opening file...\n";
-	file.open("ex2_input.txt", ios::out | ios::trunc);
-	cout << "Now writing data to input.txt \n";
-	
-	int i = 0;
-	while(i < 10){
-		file << nums[i] <<"\n";
-		i++;
-	}
-	
-	cout << "Now closing input.txt \n";
-	file.close();
-}
-
-/* Function: read 10 real numbers from input.txt */
-
-void readFromFile(double* nums){
-	fstream file;	//object used to manage files
-	
-	cout << "Opening file...\n";
-	file.open("ex2_input.txt", ios::in);
-	cout << "Now reading data from input.txt \n";
-	
-	int i = 0;
-	while(!file.eof()){
-		file >> nums[i];
-		i++;
-	}
-	
-	cout << "Now closing input.txt \n";
-	file.close();
 }
 
 /* Function: caculate sum of square of a number */
