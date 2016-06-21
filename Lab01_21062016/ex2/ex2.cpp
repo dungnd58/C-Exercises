@@ -50,6 +50,7 @@ int main()
 	return 0;
 }
 
+/* Function: print the sequence of numbers */
 void printNums(double* nums){
 	int i = 0;
 	while(i < 10){

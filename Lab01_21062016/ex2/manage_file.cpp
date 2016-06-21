@@ -34,7 +34,6 @@ void FileManager::writeToFile(double* nums){
 }
 
 /* Function: read 10 real numbers from input.txt */
-
 void FileManager::readFromFile(double* nums){
 	fstream file;	//object used to manage files
 	
