@@ -18,15 +18,15 @@ using namespace std;
 
 /* Function: input all students' information and marks */
 void enterStudentInfo(Class* classes, int class_id){
-	int n;
+	int nums;
 	int i,j;
 	cout << "Enter number of students: ";
-	cin >> n;
+	cin >> nums;
 	
 	int numbers = classes[class_id-1].numbers;		//get the number of students in class
 	i = numbers; 									//continue to add students
 	
-	while(i < numbers + n){
+	while(i < numbers + nums){
 		//Increase number of students in Class
 		classes[class_id-1].numbers++;
 		
@@ -89,10 +89,10 @@ void enterStudentInfo(Class* classes, int class_id){
 }
 
 /* Function: output results of some students */
-void searchStudents(Class* classes, int class_id, int id){
+void searchStudents(Class* classes, int class_id, int student_id){
 	//Search by ID
-	if(id < classes[class_id-1].numbers){
-		printAStudentResult(classes[class_id-1].students,id);
+	if(student_id < classes[class_id-1].numbers){
+		printAStudentResult(classes[class_id-1].students, student_id);
 	}
 	else {
 		cout << "The student is not in the list." << endl;
@@ -101,7 +101,9 @@ void searchStudents(Class* classes, int class_id, int id){
 
 
 /* Function: output a student's result */
-void printAStudentResult(Student* students, int id){
+void printAStudentResult(Student* students, int student_id){
+	int id = student_id;
+	
 	// Start to output
 	int j;
 	

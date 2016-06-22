@@ -30,6 +30,9 @@ void printAll(Intership* students, int num);
 void sumScore(Intership* student, int num);
 void rateRank(Intership* students, int num);
 
+const int GOOD = 18;
+const int EXELENT = 24;
+
 int main()
 {
 	int num = 0;					//number of intership
@@ -211,10 +214,11 @@ Function: rate rank of intership based on sum of marks
 
 void rateRank(Intership* students, int num){
 	int j=0;
+	
 	while(j < num){
-		if(students[j].sum >= 24){
+		if(students[j].sum >= EXELENT){
 			students[j].rank = "Exelence";
-		} else if(students[j].sum < 24 && students[j].sum >= 18){
+		} else if(students[j].sum < EXELENT && students[j].sum >= GOOD){
 			students[j].rank = "Good";
 		} else {
 			students[j].rank = "Average";

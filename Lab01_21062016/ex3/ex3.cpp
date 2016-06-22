@@ -34,7 +34,7 @@ int main()
 	};
 	
 	//get information of all Class
-	//getFromFile(classes);
+	getFromFile(classes);
 	
 	int choice = 0;
 	while(choice != 4){
